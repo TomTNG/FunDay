@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "633342545847",
+    "firebase_url": "https://funday-5146c.firebaseio.com",
+    "project_id": "funday-5146c",
+    "storage_bucket": "funday-5146c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633342545847:android:5b6b4ef690130daf",
+        "android_client_info": {
+          "package_name": "innt.ffhs.ch.funday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633342545847-vhgrs9n1dt3447p5aoujqapru2tuerst.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "innt.ffhs.ch.funday",
+            "certificate_hash": "b73f170b28a4721b54fd5a3822d851971fe29ed2"
+          }
+        },
+        {
+          "client_id": "633342545847-gua6jrfr13f4d471rlgg96ha70eq36en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqy6qZ1gPQDMd0TkJtGM-IZj0uZCCKjGk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633342545847-gua6jrfr13f4d471rlgg96ha70eq36en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

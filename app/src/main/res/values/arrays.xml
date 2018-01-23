@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="resorts">
+        <item>"Saas Fee"</item>
+        <item>"Axalp"</item>
+        <item>"Elsigen"</item>
+    </string-array>
+
+
+</resources>

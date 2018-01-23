@@ -1,20 +1,21 @@
 package innt.ffhs.ch.funday;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import innt.ffhs.ch.funday.model.Resort;
 
 
 /**
@@ -78,16 +79,46 @@ public class ListFragment2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_list_fragment2, container, false);
+        final View view = inflater.inflate(R.layout.fragment_list_fragment2, container, false);
         // Set the adapter
         if (mListener != null) {
             mListener.onFragmentInteraction("Resorts");
         }
-        ListView listView = view.findViewById(R.id.resortList);
+        //ListView listView = view.findViewById(R.id.resortList);
+
+        final ArrayList names = new ArrayList<>();
+        final ArrayList prices = new ArrayList<>();
+        final ArrayList availabilitys = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Resorts");
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, resortList);
-        listView.setAdapter(arrayAdapter);
+        ((ListView)view.findViewById(R.id.resortList2)).
+                setAdapter(new CustomListAdapater(names,availabilitys,prices,this));
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
+                while ((iterator.hasNext())){
+                    Resort value = iterator.next().getValue(Resort.class);
+                    availabilitys.add("Available: "+ value.getAvailability());
+                    names.add(value.getName());
+                    prices.add("Price: " + value.getPrice());
+
+                    ((CustomListAdapater)(((ListView)view.findViewById(R.id.resortList2)).getAdapter())).notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //
+        //
+        //final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, resortList);
+        //listView.setAdapter(arrayAdapter);
 
         return view;
     }
@@ -108,6 +139,10 @@ public class ListFragment2 extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    private void readData() {
+
     }
 
 
